@@ -1,0 +1,12 @@
+{
+  "port": 8080,
+  "ratelimit_text_length": 2500,
+  "ratelimit_expire_seconds": 86400,
+  "ratelimit_bypass_ids": [86477779717066752],
+  "file_location": "./audios",
+  "postgresql": "postgresql://DATABASENAME:DATABASEPASSWORD@localhost/DATABASENAME",
+  "token": "SOME_SECRET_TOKEN_YOU_NEVER_SHARE",
+  "access_key": "access_key_yes",
+  "secret_access_key": "secret_access_key_yes",
+  "aws_region": "eu-west-2"
+}

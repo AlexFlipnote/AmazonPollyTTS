@@ -145,7 +145,7 @@ async def get_user_data(user_id: int):
     }
 
 
-@app.route("/tts")
+@app.route("/create")
 @authenticate
 @ratelimit_manager
 async def make_tts():

@@ -81,7 +81,7 @@ def ratelimit_manager(func):
 
 @app.route("/")
 async def index():
-    return json_response(200, "Success", "API is online!")
+    return json_response("Success", "API is online, have some tea.", code=418)
 
 
 @app.route("/audios/<filename>")

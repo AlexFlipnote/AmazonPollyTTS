@@ -1,0 +1,8 @@
+{
+  "apps": [
+    {
+      "name":"Polly",
+      "script":"start.sh"
+    }
+  ]
+}

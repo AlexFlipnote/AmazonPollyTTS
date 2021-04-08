@@ -134,7 +134,7 @@ async def get_user_data(user_id: int):
 
     today_used = [
         g["text_length"] for g in data
-        if data["created_at"] > int(time.time()) - config["ratelimit_expire_seconds"]
+        if g["created_at"] > int(time.time()) - config["ratelimit_expire_seconds"]
     ]
 
     return {

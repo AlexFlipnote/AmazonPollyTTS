@@ -57,11 +57,11 @@ def authenticate(func):
 def ratelimit_manager(func):
     @wraps(func)
     async def wrapper(*args, **kwargs):
-        user_id = request.headers.get("user_id")
+        user_id = request.headers.get("x-userid")
         if not user_id:
-            abort(400, "Missing 'user_id' in headers")
+            abort(400, "Missing 'x-userid' in headers")
         if not user_id.isdigit():
-            abort(400, "'user_id' must be int value")
+            abort(400, "'x-userid' must be int value")
 
         data = await pool.fetch(
             "SELECT * FROM discord_user WHERE user_id=$1 AND created_at>$2",
@@ -149,10 +149,10 @@ async def get_user_data(user_id: int):
 @authenticate
 @ratelimit_manager
 async def make_tts():
-    text = request.headers.get("text")
-    user_id = request.headers.get("user_id")
-    if not text or not user_id:
-        return abort(400, "Missing 'text' headers")
+    text = request.headers.get("x-text")
+    user_id = request.headers.get("x-userid")
+    if not text:
+        return abort(400, "Missing 'x-text' headers")
 
     get_cache = await pool.fetchrow(
         "SELECT * FROM files WHERE LOWER(text_input)=$1",

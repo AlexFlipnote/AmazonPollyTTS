@@ -68,12 +68,12 @@ def ratelimit_manager(func):
             int(user_id), int(time.time()) - config["ratelimit_expire_seconds"]
         )
 
-        can_bypass = int(user_id) in config["ratelimit_bypass_ids"]
+        not_bypass = int(user_id) not in config["ratelimit_bypass_ids"]
 
-        if not can_bypass and data:
+        if data:
             total_text_length = sum([g["text_length"] for g in data])
             max_length = config["ratelimit_text_length"]
-            if total_text_length >= max_length:
+            if not_bypass and total_text_length >= max_length:
                 abort(429, f"You've used up all your characters for today ({total_text_length}/{max_length})")
         return await func(*args, **kwargs)
     return wrapper
